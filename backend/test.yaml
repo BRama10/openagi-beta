@@ -1,0 +1,17 @@
+# config.yaml
+meta:
+  author: Balaji Rama
+  version: 0.0
+  name: Example Agent
+
+lines:
+  - line: "def agent():"
+    indent: 0
+  - line: "num1 = 1"
+    indent: 4
+  - line: "num2 = 3"
+    indent: 4
+  - line: "num3 = 6"
+    indent: 4
+  - line: "return num1+num2+num3"
+    indent: 4

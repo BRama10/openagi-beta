@@ -1,0 +1,27 @@
+// schema.prisma
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider  = "postgresql"
+    url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
+    directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+}
+
+// model Line {
+//     id            String       @id @default(cuid())
+//     line          String
+//     indent        Int
+//     AgentConfig   AgentConfig? @relation(fields: [agentConfigId], references: [id])
+//     agentConfigId String?
+// }
+
+model AgentConfig {
+    id        String @id @default(cuid())
+    name      String
+    file_data Json[]
+    version   Float
+    author    String
+}
