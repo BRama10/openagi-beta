@@ -1,0 +1,11 @@
+lines:
+- indent: 0
+  line: 'def agent():'
+- indent: 4
+  line: string = 'test'
+- indent: 4
+  line: return string
+meta:
+  author: Kai Mei
+  name: Example Agent 2
+  version: 0.2

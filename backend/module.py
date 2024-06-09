@@ -138,6 +138,7 @@ def write_config(path: str) -> None:
 
     print(f"Created {yaml_file_path} from {path}")
 
-# upload_agent("/Users/rama2r/openagi-beta/backend/test.yaml")
+# write_config("/Users/rama2r/openagi-beta/backend/example_agent.py")
+# upload_agent("/Users/rama2r/openagi-beta/example_agent.yaml")
 
-download_agent('Example Agent', version=None)
+download_agent('Example Agent 2', version=None)
