@@ -2,12 +2,20 @@
 import { AgentContainer } from "@/components/AgentContainer";
 import { StrictModeDroppable } from "@/components/rewrites/StrictModeDroppable";
 import Image from "next/image";
-import { useState } from "react";
+import { Calculator, LucideProps } from "lucide-react";
+import { ReactNode, useState } from "react";
 
 import { DragDropContext, Droppable, OnDragEndResponder } from '@hello-pangea/dnd'
 
 export default function Home() {
-  const [agents, setAgents] = useState<string[]>(['Math Agent', 'Story Agent', 'Cow Agent']);
+  const [agents, setAgents] = useState<Record<string, string | ReactNode>[]>([{
+    name: 'Math Agent',
+    icon: <Calculator />
+  },{
+    name: 'Story Agent',
+    icon: <Calculator />
+  },
+  ]);
 
   function swap(array_: any[], index1: number, index2: number): any[] {
     let array = [...array_]
@@ -47,7 +55,7 @@ export default function Home() {
             <div className='w-1/4 h-full flex flex-col px-3 py-3 gap-y-3'
               {...provided.droppableProps}
               ref={provided.innerRef}>
-              {agents.map((agent: string, index: number) => (<AgentContainer key={`${index}-agentcountertabs`} name={agent} index={index} unique={'agentcountertabs'} />))}
+              {agents.map((agent, index: number) => (<AgentContainer key={`${index}-agentcountertabs`} name={agent.name as string} index={index} unique={'agentcountertabs'} icon={agent.icon as ReactNode} />))}
             </div>)}
         </StrictModeDroppable>
         <div className='w-3/4 h-full' >
