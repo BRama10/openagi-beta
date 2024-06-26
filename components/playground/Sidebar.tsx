@@ -7,8 +7,8 @@ export default () => {
     };
   
     return (
-      <aside className='w-full h-full flex flex-col'>
-        <div className="description">You can drag these nodes to the pane on the right.</div>
+      <aside className='w-full h-full flex flex-col p-4'>
+        <div className="text-white text-4xl w-full text-center">Editor</div>
         <div className="dndnode input" onDragStart={(event) => onDragStart(event, 'input')} draggable>
           Input Node
         </div>
