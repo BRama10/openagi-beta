@@ -1,19 +1,26 @@
-import React, { memo, ReactNode } from 'react';
+'use client'
+
+import React, { memo, ReactNode, useEffect, useState } from 'react';
 import { Handle, NodeProps, Position } from 'reactflow';
-import { FiCloud } from 'react-icons/fi';
+import { FaQuestion } from 'react-icons/fa6';
 
-export type TurboNodeData = {
-    title: string;
-    icon?: ReactNode;
-    subline?: string;
-};
+export type DecisiveNodeData = {
+    setter: (s: string) => void
+  };
 
-export default memo(({ data }: NodeProps<TurboNodeData>) => {
+export default memo(({ data }: NodeProps<DecisiveNodeData>) => {
+    const [text, setText] = useState('')
+
+    useEffect(() => {
+      if (text)
+        data.setter(text)
+    }, [text])
+
     return (
         <>
             <div className="cloud gradient">
                 <div>
-                    <FiCloud />
+                    <FaQuestion />
                 </div>
             </div>
             <div className="wrapper gradient">
@@ -22,8 +29,8 @@ export default memo(({ data }: NodeProps<TurboNodeData>) => {
                         <h1 className='w-full text-center text-lg text-white'>Decisive Agent</h1>
                         <textarea className='w-full h-full bg-white text-black rounded-lg text-xs p-3'
                             rows={3}
-                            // value={text} 
-                            // onChange={e => setText(e.target.value)}
+                            value={text} 
+                            onChange={e => setText(e.target.value)}
                             placeholder={'Enter Agent Instructions Here'}>
 
                         </textarea>
