@@ -8,7 +8,8 @@ export type DecisiveNodeData = {
     setter: (s: string) => void
   };
 
-export default memo(({ data }: NodeProps<DecisiveNodeData>) => {
+
+const Decisive = ({ data }: NodeProps<DecisiveNodeData>) => {
     const [text, setText] = useState('')
 
     useEffect(() => {
@@ -57,4 +58,6 @@ export default memo(({ data }: NodeProps<DecisiveNodeData>) => {
             </div>
         </>
     );
-});
+};
+
+export default memo(Decisive);

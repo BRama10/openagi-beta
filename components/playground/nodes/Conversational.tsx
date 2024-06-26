@@ -6,7 +6,7 @@ export type ConversationalNodeData = {
 
 };
 
-export default memo(({ data }: NodeProps<ConversationalNodeData>) => {
+const Conversational = ({ data }: NodeProps<ConversationalNodeData>) => {
     return (
         <>
             <div className="cloud gradient">
@@ -26,4 +26,7 @@ export default memo(({ data }: NodeProps<ConversationalNodeData>) => {
             </div>
         </>
     );
-});
+};
+
+
+export default memo(Conversational);

@@ -8,7 +8,7 @@ export type LaboriousNodeData = {
   setter: (s: string) => void
 };
 
-export default memo(({ data }: NodeProps<LaboriousNodeData>) => {
+const Laborious = ({ data }: NodeProps<LaboriousNodeData>) => {
   const [text, setText] = useState('')
 
   useEffect(() => {
@@ -42,4 +42,6 @@ export default memo(({ data }: NodeProps<LaboriousNodeData>) => {
       </div>
     </>
   );
-});
+};
+
+export default memo(Laborious);
