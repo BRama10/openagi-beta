@@ -6,7 +6,6 @@ import { FiFile } from 'react-icons/fi';
 
 import 'reactflow/dist/base.css';
 import '@/components/playground/rewrites.css';
-import TurboNode, { TurboNodeData } from '@/components/playground/Node';
 import TurboEdge from '@/components/playground/Edge';
 import FunctionIcon from '@/components/playground/FunctionIcon';
 import Sidebar from '@/components/playground/Sidebar';
@@ -70,7 +69,6 @@ const nodeTypes = {
     decisive: Decisive,
     conversable: Conversational,
     laborious: Laborious,
-    turbo: TurboNode
 };
 
 const edgeTypes = {
