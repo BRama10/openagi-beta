@@ -53,6 +53,7 @@ class AgentBuilder {
 
     async run(name: string, prompt: string) {
         const agent = this.agents[name];
+        console.log(agent);
 
         const result = await agent(prompt);
 
@@ -67,8 +68,14 @@ builder.build('expression_agent', 'laborious', 'You are an agent that structures
 })
 
 
+builder.build('expression_agent', 'laborious', 'You are an agent that structures words problems into numerical math expressions that can be read by MathJS. YOU DO NOT EVALUATE THE PROBLEM OR SOLVE IT, SIMPLY MAKING IT INTO AN EXPRESSION', {
+    expression: 'math expression goes here'
+})
+
+
+
 export const ExpressionAgent = async (phrase: string) => {
-    const res = await builder.run('math_agent', phrase)
+    const res = await builder.run('expression_agent', phrase)
     return res.expression;
 }
 
@@ -76,6 +83,16 @@ export const EvalAgent = (phrase: string) => {
     return evaluate(phrase);
 }
 
+if (import.meta.url === new URL(import.meta.url).href) {
+    (async function () {
+        // Your main code here
+        const res = await ExpressionAgent('I have 59 chickens and my friend has 32 chickens, how many chickens are there in total?')
+        console.log(`Expression Is: ${res}`);
+
+        const ans = EvalAgent(res);
+        console.log(`Answer Is: ${ans}`);
+    })();
+}
 
 
 

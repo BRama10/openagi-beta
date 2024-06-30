@@ -16,6 +16,8 @@ import { Connection, createWorkflowStructure } from '@/agents/graph';
 
 const initialNodes: Node<any>[] = [];
 
+import { AgentContainer } from '@/components/AgentContainer';
+
 // [
 //     {
 //         id: '1',
@@ -188,9 +190,10 @@ const Flow = () => {
 
                         console.log(connections)
 
-                        const workflow = createWorkflowStructure(connections);
+                        // const workflow = createWorkflowStructure(connections);
+                        // AgentContainer('math_agent');
 
-                        console.log(workflow)
+                        // console.log(workflow)
                     }}>
                         Run Simulation
                     </button>
