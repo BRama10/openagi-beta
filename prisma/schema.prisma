@@ -10,18 +10,13 @@ datasource db {
     directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
 
-// model Line {
-//     id            String       @id @default(cuid())
-//     line          String
-//     indent        Int
-//     AgentConfig   AgentConfig? @relation(fields: [agentConfigId], references: [id])
-//     agentConfigId String?
-// }
-
 model AgentConfig {
-    id        String @id @default(cuid())
-    name      String
-    file_data Json[]
-    version   Float
-    author    String
+    id           String @id @default(cuid())
+    name         String
+    file_data    String
+    version      Float
+    author       String
+    description  String
+    license      String
+    dependencies String
 }

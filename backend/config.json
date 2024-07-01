@@ -2,8 +2,8 @@
     "meta": {
         "author": "Balaji Rama",
         "version": "0.0",
-        "name": "Example Agent",
-        "description": "Description Here",
+        "name": "Web Agent",
+        "description": "Description Here For the Web Agent",
         "license": "CC-0",
         "logo": "Path To Logo"
     },
