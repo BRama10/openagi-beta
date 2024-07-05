@@ -133,5 +133,5 @@ class Interact:
 
 if __name__ == '__main__':
     client = Interact('agent.py', name='new_agent1', output='new_agent_download/interact_downloaded.py')
-    client.download_agent().decompress().decompress_reqs().install()
-    # client.minify_python_code().compress().compress_reqs().upload()
+    # client.download_agent().decompress().decompress_reqs().install()
+    client.minify_python_code().compress().compress_reqs().upload()
