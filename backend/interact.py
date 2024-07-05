@@ -122,9 +122,16 @@ class Interact:
             subprocess.check_call(
                 [sys.executable, "-m", "pip", "install", requirement.strip()])
         subprocess.check_call([sys.executable, "-m", "playwright", "install"])
+        
         return self
     
+    # def run(self, config='file_config'):
+    #     a = AgentWrapper(config=config)
+    #     a.initialize()
+    #     a.run()
+        
+
 if __name__ == '__main__':
-    client = Interact('web_agent.py', name='web', output='sample_output/interact_downloaded.py')
-    # client.download_agent().decompress().decompress_reqs().install()
+    client = Interact('agent.py', name='new_agent1', output='new_agent_download/interact_downloaded.py')
+    client.download_agent().decompress().decompress_reqs().install()
     # client.minify_python_code().compress().compress_reqs().upload()
