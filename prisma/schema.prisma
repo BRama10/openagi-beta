@@ -12,11 +12,11 @@ datasource db {
 
 model AgentConfig {
     id           String @id @default(cuid())
-    name         String
-    file_data    String
-    version      Float
     author       String
-    description  String
+    name         String
+    version      Float
     license      String
+    code         String
+    config       String
     dependencies String
 }
