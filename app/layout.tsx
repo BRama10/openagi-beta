@@ -17,6 +17,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <script
+        async
+          type="module"
+          defer
+          src="https://cdn.jsdelivr.net/npm/ldrs/dist/auto/hatch.js"
+        ></script>
       <body className={inter.className}>
         <FlowProvider>
           {children}

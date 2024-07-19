@@ -23,7 +23,7 @@ const Container = ({ children }: { children: ReactNode | ReactNode[] }) => {
     }, [children]);
 
     return (
-        <div ref={containerRef} className="h-[75vh] w-full flex flex-col max-h-3/4 overflow-y-auto">
+        <div ref={containerRef} className="h-[75vh] w-full flex flex-col max-h-3/4 overflow-y-auto gap-y-2 px-10">
             {children}
         </div>
     );

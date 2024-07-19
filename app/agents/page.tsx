@@ -14,6 +14,8 @@ import defaultMentionStyle from './defaultMentionStyle';
 
 import './s.css'
 import Container from '@/components/agents/Container';
+import { ChatBreak, ChatBreakProps, ChatMessage, ChatMessageProps, isChatBreakProps, isChatMessageProps } from '@/components/agents/ChatMessage';
+import { Chat } from 'groq-sdk/resources/index.mjs';
 
 const agents = [
     {
@@ -26,6 +28,27 @@ const agents = [
     },
 ]
 
+interface AgentCommand {
+    name: string;
+    content: string;
+}
+
+function parseAgentCommands(input: string): AgentCommand[] {
+    const result: AgentCommand[] = [];
+    const regex = /@\[([^\]]+)\]\(([^)]+)\)\s*([^@]*)/g;
+    let match;
+
+    while ((match = regex.exec(input)) !== null) {
+        const [_, fullName, name, content] = match;
+        result.push({
+            name: name.trim(),
+            content: content.trim()
+        });
+    }
+
+    return result;
+}
+
 export default function AgentsPage() {
     const [value, setValue] = useState('');
     const textAreaRef = useRef<HTMLTextAreaElement>(null);
@@ -34,9 +57,40 @@ export default function AgentsPage() {
     useAutosizeTextArea(textAreaRef.current, value);
 
     const handleQuery = () => {
-        setChatStarted(true);
+        if (!chatStarted)
+            setChatStarted(true);
+
+        const parsed = parseAgentCommands(value);
+
+        setMessages((prev) => {
+            return [
+                ...prev,
+                ...parsed.map(p => ({
+                    direction: 'left',
+                    agentName: p.name,
+                    query: p.content
+                } as ChatMessageProps)),
+                {
+                    size: 10
+                },
+                {
+                    direction: 'right',
+                    agentName: 'user',
+                    query: value
+                },
+                {
+                    size: 10
+                },
+            ]
+
+        })
+
         setValue('')
+
+
     }
+
+    const [messages, setMessages] = useState<Array<ChatMessageProps | ChatBreakProps>>([]);
 
     return (
         <main className="w-full h-screen overflow-hidden flex flex-row">
@@ -50,11 +104,20 @@ export default function AgentsPage() {
                         <IdeaCard />
                         <IdeaCard />
                     </div>
-                </div>) : (<Container>
-                    <div>
-
+                </div>) : (<div className='flex flex-col gap-y-3 pt-3'>
+                    <div className='flex items-center flex-row gap-x-10 p-5 justify-center'>
+                        <Image src={'https://avatars.githubusercontent.com/u/130198651?v=4'} width={460} height={460} alt={'AGI Research Logo'} className='w-[3%] aspect-square rounded-full' />
+                        <p className='font-semibol text-3xl'>OpenAGI</p>
                     </div>
-                </Container>)}
+                    <Container>
+                        {messages.map((message, index) => {
+                            if (isChatBreakProps(message))
+                                return <ChatBreak key={index} {...message} />
+                            else if (isChatMessageProps(message))
+                                return <ChatMessage key={index} {...message} />
+                        })}
+                    </Container>
+                </div>)}
                 <div className='input-panel flex w-2/3 absolute left-0 right-0 mx-auto bottom-[20px] bg-[#F4F4F4] h-fit overflow-visible outline-none flex-row p-4 rounded-2xl gap-x-4 items-center'>
                     <MentionsInput
                         value={value}
