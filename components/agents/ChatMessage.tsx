@@ -1,5 +1,6 @@
 import { FC, useEffect } from "react";
 import axios from 'axios';
+import { Card } from "@nextui-org/react";
 
 //testing purposes
 async function delayedString(str: string) {
@@ -25,7 +26,9 @@ export const ChatMessage: FC<ChatMessageProps> = ({
 
     }, [])
 
-    return <div className='w-full'>
-        
+    return <div className={`p-3 w-full flex flex-row${direction == 'left' ? '' : '-reverse'} h-[15vh]`}>
+        <Card className='w-full'>
+          
+        </Card>
     </div>
 }
