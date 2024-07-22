@@ -8,7 +8,18 @@ import { TypeAnimation } from 'react-type-animation';
 import type { } from 'ldrs'
  
 import { StoryAgent, MathAgent } from '@/agents/build';
-import { agents } from "@/app/agents/page";
+
+export const agents = [
+    {
+        id: 'math',
+        display: 'Math Agent'
+    },
+    {
+        id: 'story',
+        display: 'Story Agent'
+    },
+]
+
 
 export interface AgentCommand {
     name: string;

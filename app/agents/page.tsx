@@ -15,17 +15,7 @@ import defaultMentionStyle from './defaultMentionStyle';
 import './s.css'
 import Container from '@/components/agents/Container';
 import { AgentCommand, ChatBreak, ChatBreakProps, ChatMessage, ChatMessageProps, isChatBreakProps, isChatMessageProps } from '@/components/agents/ChatMessage';
-
-export const agents = [
-    {
-        id: 'math',
-        display: 'Math Agent'
-    },
-    {
-        id: 'story',
-        display: 'Story Agent'
-    },
-]
+import { agents } from '@/components/agents/ChatMessage';
 
 
 function parseAgentCommands(input: string): AgentCommand[] {
