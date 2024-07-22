@@ -67,7 +67,7 @@ builder.build('expression_agent', 'laborious', 'You are an agent that structures
     expression: 'math expression goes here'
 })
 
-builder.build('story_agent', 'laborious', 'You are an agent that writes a short story according to the instructions given.')
+builder.build('story_agent', 'laborious', 'You are an agent that writes a short story according to the instructions given. Use a maximum of 120 words.', {})
 
 
 export const ExpressionAgent = async (phrase: string) => {

@@ -16,7 +16,7 @@ import './s.css'
 import Container from '@/components/agents/Container';
 import { AgentCommand, ChatBreak, ChatBreakProps, ChatMessage, ChatMessageProps, isChatBreakProps, isChatMessageProps } from '@/components/agents/ChatMessage';
 
-const agents = [
+export const agents = [
     {
         id: 'math',
         display: 'Math Agent'
@@ -60,19 +60,20 @@ export default function AgentsPage() {
         setMessages((prev) => {
             return [
                 ...prev,
-                ...parsed.map(p => ({
-                    direction: 'left',
-                    agentName: p.name,
-                    query: p.content
-                } as ChatMessageProps)),
-                {
-                    size: 10
-                },
                 {
                     direction: 'right',
                     agentName: 'user',
                     query: parsed
                 },
+                {
+                    size: 10
+                },
+                ...parsed.map(p => ({
+                    direction: 'left',
+                    agentName: p.name,
+                    query: p.content
+                } as ChatMessageProps)),
+                
                 {
                     size: 10
                 },

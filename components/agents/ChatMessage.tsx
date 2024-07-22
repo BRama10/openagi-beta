@@ -1,13 +1,14 @@
 import { FC, useEffect, useState } from "react";
 import axios from 'axios';
-import { Card, CardBody } from "@nextui-org/react";
+import { Card, CardBody, Chip } from "@nextui-org/react";
 import { AgentMapping } from "@/exports";
 
 import { User, User2 } from "lucide-react";
 import { TypeAnimation } from 'react-type-animation';
 import type { } from 'ldrs'
-
+ 
 import { StoryAgent, MathAgent } from '@/agents/build';
+import { agents } from "@/app/agents/page";
 
 export interface AgentCommand {
     name: string;
@@ -70,7 +71,7 @@ export const ChatMessage: FC<ChatMessageProps> = ({
                 q = await MathAgent(s);
                 q = `The answer to the problem is ${q}`
             }
-            
+
             setResponse(`${q}`);
         }
 
@@ -78,9 +79,17 @@ export const ChatMessage: FC<ChatMessageProps> = ({
             _(query as string, agentName)
     }, [])
 
+    const getAgentProperNameByKey = (key: string) => {
+        for (const x of agents) {
+            if (x.id == key) {
+                return x.display
+            }
+        }
+    }
 
-    return <div className={`p-0 w-full flex justify-start flex-row${direction == 'left' ? '' : '-reverse'} h-[15vh]`}>
-        <Card className='w-[41%] h-full p-2'>
+
+    return <div className={`px-0 w-full flex justify-start flex-row${direction == 'left' ? '' : '-reverse'} h-fit py-0`}>
+        <Card className='w-[41%] h-full p-2 py-4'>
             {agentName != 'user' && <CardBody className='p-2 flex flex-col gap-y-2'>
                 <div className='flex flex-row gap-x-3 items-center'>
                     {AgentMapping[agentName].icon}
@@ -96,7 +105,7 @@ export const ChatMessage: FC<ChatMessageProps> = ({
                         sequence={[response]}
                         wrapper="span"
                         speed={50}
-                        style={{ fontSize: '1.125rem', lineHeight: '1.75rem', display: 'inline-block'}}
+                        style={{ fontSize: '1.125rem', lineHeight: '1.75rem', display: 'inline-block' }}
                         repeat={0}
                         cursor={false}
                     /> :
@@ -113,7 +122,13 @@ export const ChatMessage: FC<ChatMessageProps> = ({
                     <User2 color={'blue'} />
                     <p className='text-2xl font-semibold'>User</p>
                 </div>
-                <p className='text-base'>{query}</p>
+                <div className='text-base flex flex-col gap-y-2'>
+                    {(query as AgentCommand[]).map((q, index) =>
+                        <div className='flex flex-row gap-x-4'>
+                            <Chip color={q.name == 'story' ? 'danger' : 'success'}>{getAgentProperNameByKey(q.name)}</Chip>
+                            <span>{q.content}</span>
+                        </div>)}
+                </div>
             </CardBody>}
         </Card>
     </div>
