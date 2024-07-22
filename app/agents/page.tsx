@@ -9,10 +9,10 @@ import { SearchCode } from 'lucide-react';
 
 import { Mention, MentionsInput } from 'react-mentions'
 
-import defaultStyle from './defaultStyle'
-import defaultMentionStyle from './defaultMentionStyle';
+import defaultStyle from '../../components/agents/defaultStyle'
+import defaultMentionStyle from '../../components/agents/defaultMentionStyle';
 
-import './s.css'
+import '../../components/agents/s.css'
 import Container from '@/components/agents/Container';
 import { AgentCommand, ChatBreak, ChatBreakProps, ChatMessage, ChatMessageProps, isChatBreakProps, isChatMessageProps } from '@/components/agents/ChatMessage';
 import { agents } from '@/components/agents/ChatMessage';
