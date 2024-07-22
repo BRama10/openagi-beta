@@ -124,7 +124,7 @@ export const ChatMessage: FC<ChatMessageProps> = ({
                 </div>
                 <div className='text-base flex flex-col gap-y-2'>
                     {(query as AgentCommand[]).map((q, index) =>
-                        <div className='flex flex-row gap-x-4'>
+                        <div className='flex flex-row gap-x-4' key={`sdgdsg-${index}`}>
                             <Chip color={q.name == 'story' ? 'danger' : 'success'}>{getAgentProperNameByKey(q.name)}</Chip>
                             <span>{q.content}</span>
                         </div>)}
