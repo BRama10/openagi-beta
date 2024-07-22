@@ -7,6 +7,7 @@ export type AgentType = 'decisive' | 'conversational' | 'laborious';
 export default class Agent {
     private groq = new Groq({
         apiKey: groq_token,
+        dangerouslyAllowBrowser: true
     });
 
     private name: string;

@@ -7,6 +7,14 @@ import { User, User2 } from "lucide-react";
 import { TypeAnimation } from 'react-type-animation';
 import type { } from 'ldrs'
 
+import { StoryAgent, MathAgent } from '@/agents/build';
+
+export interface AgentCommand {
+    name: string;
+    content: string;
+}
+
+
 //testing purposes
 async function delayedString(str: string): Promise<string> {
     return new Promise((resolve) => {
@@ -24,7 +32,7 @@ const _ = async (s: string) => {
 export interface ChatMessageProps {
     direction: 'right' | 'left';
     agentName: 'math' | 'story' | 'user';
-    query: string;
+    query: string | AgentCommand[];
 }
 
 export interface ChatBreakProps {
@@ -54,12 +62,20 @@ export const ChatMessage: FC<ChatMessageProps> = ({
 
     useEffect(() => {
         const _ = async (s: string, v: string) => {
-            const r = await delayedString(s);
-            setResponse(r);
+            console.log(s, v)
+            let q = '';
+            if (v == 'story') {
+                q = await StoryAgent(s);
+            } else if (v == 'math') {
+                q = await MathAgent(s);
+                q = `The answer to the problem is ${q}`
+            }
+            
+            setResponse(`${q}`);
         }
 
         if (agentName != 'user')
-            _(query, agentName)
+            _(query as string, agentName)
     }, [])
 
 

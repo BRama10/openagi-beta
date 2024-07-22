@@ -67,11 +67,7 @@ builder.build('expression_agent', 'laborious', 'You are an agent that structures
     expression: 'math expression goes here'
 })
 
-
-builder.build('expression_agent', 'laborious', 'You are an agent that structures words problems into numerical math expressions that can be read by MathJS. YOU DO NOT EVALUATE THE PROBLEM OR SOLVE IT, SIMPLY MAKING IT INTO AN EXPRESSION', {
-    expression: 'math expression goes here'
-})
-
+builder.build('story_agent', 'laborious', 'You are an agent that writes a short story according to the instructions given.')
 
 
 export const ExpressionAgent = async (phrase: string) => {
@@ -83,16 +79,29 @@ export const EvalAgent = (phrase: string) => {
     return evaluate(phrase);
 }
 
-if (import.meta.url === new URL(import.meta.url).href) {
-    (async function () {
-        // Your main code here
-        const res = await ExpressionAgent('I have 59 chickens and my friend has 32 chickens, how many chickens are there in total?')
-        console.log(`Expression Is: ${res}`);
-
-        const ans = EvalAgent(res);
-        console.log(`Answer Is: ${ans}`);
-    })();
+export const MathAgent = async (phrase: string) => {
+    console.log('here')
+    const res = await builder.run('expression_agent', phrase)
+    console.log(res.expression)
+    console.log(evaluate(res.expression))
+    return evaluate(res.expression);
 }
+
+export const StoryAgent = async (phrase: string) => {
+    const res = await builder.run('story_agent', phrase)
+    return res
+}
+
+// if (import.meta.url === new URL(import.meta.url).href) {
+//     (async function () {
+//         // Your main code here
+//         const res = await ExpressionAgent('I have 59 chickens and my friend has 32 chickens, how many chickens are there in total?')
+//         console.log(`Expression Is: ${res}`);
+
+//         const ans = EvalAgent(res);
+//         console.log(`Answer Is: ${ans}`);
+//     })();
+// }
 
 
 

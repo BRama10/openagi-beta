@@ -14,8 +14,7 @@ import defaultMentionStyle from './defaultMentionStyle';
 
 import './s.css'
 import Container from '@/components/agents/Container';
-import { ChatBreak, ChatBreakProps, ChatMessage, ChatMessageProps, isChatBreakProps, isChatMessageProps } from '@/components/agents/ChatMessage';
-import { Chat } from 'groq-sdk/resources/index.mjs';
+import { AgentCommand, ChatBreak, ChatBreakProps, ChatMessage, ChatMessageProps, isChatBreakProps, isChatMessageProps } from '@/components/agents/ChatMessage';
 
 const agents = [
     {
@@ -28,10 +27,6 @@ const agents = [
     },
 ]
 
-interface AgentCommand {
-    name: string;
-    content: string;
-}
 
 function parseAgentCommands(input: string): AgentCommand[] {
     const result: AgentCommand[] = [];
@@ -76,7 +71,7 @@ export default function AgentsPage() {
                 {
                     direction: 'right',
                     agentName: 'user',
-                    query: value
+                    query: parsed
                 },
                 {
                     size: 10
